@@ -17,6 +17,9 @@ const xssMiddleware = require("./middlewares/xss-filter");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const notFoundMiddleware = require("./middlewares/not-found");
 
+//Routes
+const authRouter = require("./routes/authRoutes");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -43,6 +46,8 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("E-Commerce API");
 });
+
+app.use("/api/v1/auth", authRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
