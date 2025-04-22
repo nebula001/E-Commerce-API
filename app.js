@@ -20,6 +20,7 @@ const notFoundMiddleware = require("./middlewares/not-found");
 //Routes
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
+const productRouter = require("./routes/productRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -42,6 +43,7 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use(fileUpload());
 app.use(cookieParser(process.env.JWT_SECRET));
+app.use(express.static("public"));
 
 //Routes
 app.get("/", (req, res) => {
@@ -50,6 +52,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/products", productRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
