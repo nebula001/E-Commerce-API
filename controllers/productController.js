@@ -20,7 +20,9 @@ const getAllProducts = async (req, res) => {
 };
 
 const getSingleProduct = async (req, res) => {
-  const singleProduct = await Product.findById(req.params.id);
+  const singleProduct = await Product.findById(req.params.id).populate(
+    "reviews"
+  );
   if (!singleProduct) {
     throw new CustomError.NotFound(`No product with id ${req.params.id} found`);
   }
