@@ -14,7 +14,7 @@ const createProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const allProducts = await Product.find();
+  const allProducts = await Product.find().populate("reviews");
   res
     .status(StatusCodes.OK)
     .json({ products: allProducts, count: allProducts.length });
@@ -73,6 +73,10 @@ const uploadImage = async (req, res) => {
 
 const getSingleProductReview = async (req, res) => {
   const { id: productId } = req.params;
+  const productExists = await Product.findById(productId);
+  if (!productExists) {
+    throw new CustomError.NotFound(`No product with id ${productId} found`);
+  }
   const reviews = await Review.find({ product: productId }).populate({
     path: "user",
     select: "name",
