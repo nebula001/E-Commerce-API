@@ -12,6 +12,7 @@ const {
   updateProduct,
   deleteProduct,
   uploadImage,
+  getSingleProductReview,
 } = require("../controllers/productController");
 
 router
@@ -22,6 +23,8 @@ router
 router
   .route("/uploadImage")
   .post(authenticateUser, authorizePermissions("admin"), uploadImage);
+
+router.route("/:id/review").get(getSingleProductReview);
 
 router
   .route("/:id")

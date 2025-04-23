@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const Product = require("../models/Product");
+const Review = require("../models/Review");
 const CustomError = require("../errors");
 const path = require("path");
 
@@ -70,6 +71,15 @@ const uploadImage = async (req, res) => {
   res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` });
 };
 
+const getSingleProductReview = async (req, res) => {
+  const { id: productId } = req.params;
+  const reviews = await Review.find({ product: productId }).populate({
+    path: "user",
+    select: "name",
+  });
+  res.status(StatusCodes.OK).json({ reviews });
+};
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -77,4 +87,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   uploadImage,
+  getSingleProductReview,
 };
