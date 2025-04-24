@@ -1,0 +1,35 @@
+[
+  {
+    "tax": 399,
+    "shippingFee": 499,
+    "items": [
+      {
+        "name": "bed",
+        "price": 5,
+        "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
+        "amount": 34,
+        "product": "6807848e86cbc4c94bd3d2e4"
+      }
+    ]
+  },
+  {
+    "tax": 499,
+    "shippingFee": 799,
+    "items": [
+      {
+        "name": "laptop",
+        "price": 500,
+        "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
+        "amount": 3,
+        "product": "6807889c33ee14b12573981f"
+      },
+      {
+        "name": "AC",
+        "price": 5000,
+        "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
+        "amount": 2,
+        "product": "680933fe2bb4def15231f871"
+      }
+    ]
+  }
+]
