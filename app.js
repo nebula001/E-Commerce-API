@@ -12,6 +12,7 @@ const { rateLimit } = require("express-rate-limit");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const xssMiddleware = require("./middlewares/xss-filter");
+const mongoSanitize = require("express-mongo-sanitize");
 
 //Middlewares
 const errorHandlerMiddleware = require("./middlewares/error-handler");
@@ -39,6 +40,7 @@ app.use(limiter);
 app.use(xssMiddleware);
 app.use(cors());
 app.use(helmet());
+app.use(mongoSanitize());
 
 //Utilities Middleware Setup
 app.use(morgan("tiny"));
