@@ -1,0 +1,325 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local server
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+paths:
+  /auth/register:
+    post:
+      summary: Register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: "John Doe"
+              email: "john@example.com"
+              password: "securepassword"
+      responses:
+        "200":
+          description: Successful operation
+  /auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              user:
+                summary: Regular User
+                value:
+                  email: "john@example.com"
+                  password: "securepassword"
+              admin:
+                summary: Admin User
+                value:
+                  email: "admin@gmail.com"
+                  password: "newsecret"
+      responses:
+        "200":
+          description: Successful operation
+  /auth/logout:
+    get:
+      summary: Logout
+      responses:
+        "200":
+          description: Successful operation
+  /users:
+    get:
+      summary: Get All Users
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The user ID
+    get:
+      summary: Get Single User
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /users/showMe:
+    get:
+      summary: Show Current User
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /users/updateUser:
+    patch:
+      summary: Update User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: "New Name"
+              email: "new@example.com"
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /users/updateUserPassword:
+    patch:
+      summary: Update User Password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              oldPassword: "oldpass"
+              newPassword: "newpass123"
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /products:
+    get:
+      summary: Get All Products
+      responses:
+        "200":
+          description: Successful operation
+    post:
+      summary: Create All Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Laptop"
+              price: 999.99
+              description: "High-end laptop"
+              category: "electronics"
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /products/uploadImage:
+    post:
+      summary: Upload Image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /products/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The user ID
+    get:
+      summary: Get Single Product
+      responses:
+        "200":
+          description: Successful operation
+    patch:
+      summary: Update Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Updated Product"
+              price: 1099.99
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+    delete:
+      summary: Delete Product
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /products/{id}/review:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The product ID
+    get:
+      summary: Get Single Product Review
+      responses:
+        "200":
+          description: Successful operation
+  /reviews:
+    get:
+      summary: Get All Reviews
+      responses:
+        "200":
+          description: Successful operation
+    post:
+      summary: Create Reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              rating: 5
+              title: "Excellent!"
+              comment: "Loved the product"
+              productId: "abc123"
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /reviews/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The review ID
+    get:
+      summary: Get Single Review
+      responses:
+        "200":
+          description: Successful operation
+    patch:
+      summary: Update Review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: "Still Great"
+              comment: "After a month, it still works perfectly."
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+    delete:
+      summary: Delete Review
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /orders:
+    get:
+      summary: Get All Orders
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+    post:
+      summary: Create Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              tax: 399
+              shippingFee: 499
+              items:
+                - name: "bed"
+                  price: 5
+                  image: "https://example.com/image.jpg"
+                  amount: 34
+                  product: "productId123"
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /orders/showAllMyOrders:
+    get:
+      summary: Get Current User Order
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+  /orders/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The order ID
+    get:
+      summary: Get Single Order
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation
+    patch:
+      summary: Update Order Status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              status: "paid"
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Successful operation

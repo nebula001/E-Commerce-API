@@ -5,6 +5,10 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./db/connect");
+const yaml = require("js-yaml");
+const fs = require("fs");
+const swaggerUi = require("swagger-ui-express");
+const path = require("path");
 
 //Security Packages
 const cors = require("cors");
@@ -40,7 +44,7 @@ app.use(limiter);
 app.use(xssMiddleware);
 app.use(cors());
 app.use(helmet());
-app.use(mongoSanitize());
+//app.use(mongoSanitize());
 
 //Utilities Middleware Setup
 app.use(morgan("tiny"));
@@ -49,10 +53,17 @@ app.use(fileUpload());
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(express.static("public"));
 
+//Swagger UI
+const swaggerDocument = yaml.load(
+  fs.readFileSync(path.join(__dirname, "Swagger.yaml"), "utf8")
+);
+
 //Routes
 app.get("/", (req, res) => {
   res.send("E-Commerce API");
 });
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
