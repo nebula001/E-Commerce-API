@@ -6,7 +6,7 @@ info:
   description: API for an e-commerce platform with user authentication, product management, reviews, and orders
   version: 1.0.0
 servers:
-  - url: "https://api.ecommerce-example.com"
+  - url: "https://e-commerce-api-alri.onrender.com/api/v1"
     description: Production server
   - url: "http://localhost:3000/api/v1"
     description: Local development server

@@ -11,10 +11,55 @@ This API provides all the backend functionality needed for an e-commerce applica
 - Product reviews and ratings
 - Order processing and management
 
-## API Servers
+## Live Demo
 
-- Production: `https://api.ecommerce-example.com`
-- Development: `http://localhost:3000/api/v1`
+**Deployed Website:** [E-Commerce API](https://e-commerce-api-alri.onrender.com)
+
+Check out the live application to see the API in action!
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- MongoDB (local instance or MongoDB Atlas)
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/nebula001/E-Commerce-API.git
+   cd E-Commerce-API
+   ```
+
+2. Install dependencies:
+
+   ```
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following variables:
+
+   ```
+   PORT=3000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   JWT_LIFETIME=1d
+   NODE_ENV = development
+   ```
+
+4. Start the server:
+
+   ```
+   npm start
+   ```
+
+   For development with automatic restarts:
+
+   ```
+   npm run dev
+   ```
 
 ## Authentication
 
