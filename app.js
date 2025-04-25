@@ -55,7 +55,7 @@ app.use(express.static("public"));
 
 //Swagger UI
 const swaggerDocument = yaml.load(
-  fs.readFileSync(path.join(__dirname, "Swagger.yaml"), "utf8")
+  fs.readFileSync(path.join(__dirname, "Swagger_version_2.yaml"), "utf8")
 );
 
 //Routes
